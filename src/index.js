@@ -7,7 +7,6 @@ import Footer from "./components/Footer";
 import "./styles.css";
 
 export const App = observer(() => {
-  console.log("test");
   const store = useObservable({
     todos: [
       { id: 1, text: "Buy eggs", completed: true },
