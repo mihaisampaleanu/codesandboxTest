@@ -1,39 +1,33 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { observer, useObservable } from 'mobx-react-lite'
+import React from "react";
+import ReactDOM from "react-dom";
+import { observer, useObservable } from "mobx-react-lite";
 
-import TodoList from './components/TodoList'
-import Footer from './components/Footer'
-import './styles.css'
+import TodoList from "./components/TodoList";
+import Footer from "./components/Footer";
+import "./styles.css";
 
 export const App = observer(() => {
+  console.log("test");
   const store = useObservable({
     todos: [
-      { id: 1, text: 'Buy eggs', completed: true },
-      { id: 2, text: 'Write a post', completed: false }
+      { id: 1, text: "Buy eggs", completed: true },
+      { id: 2, text: "Write a post", completed: false }
     ],
     toggleTodo(index) {
-      store.todos[index].completed = !store.todos[index]
-        .completed
+      store.todos[index].completed = !store.todos[index].completed;
     },
     get remainingTodos() {
-      return store.todos.filter(t => !t.completed).length
+      return store.todos.filter(t => !t.completed).length;
     }
-  })
+  });
   return (
     <div className="App">
       <h2>A Todo App yet again!</h2>
-      <TodoList
-        todos={store.todos}
-        toggleTodo={store.toggleTodo}
-      />
-      <Footer
-        remaining={store.remainingTodos}
-        total={store.todos.length}
-      />
+      <TodoList todos={store.todos} toggleTodo={store.toggleTodo} />
+      <Footer remaining={store.remainingTodos} total={store.todos.length} />
     </div>
-  )
-})
+  );
+});
 
-const rootElement = document.getElementById('root')
-ReactDOM.render(<App />, rootElement)
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
